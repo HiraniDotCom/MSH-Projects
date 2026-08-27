@@ -9,6 +9,8 @@ import ProjMovies from "./components/ProjMovies";
 import ProjNetflix from "./components/ProjNetflix";
 import ProjSpotify from "./components/ProjSpotify";
 import ProjLibrary from "./components/ProjLibrary";
+import ProjNftWorld from "./components/ProjNftWorld";
+import ProjSummarist from "./components/ProjSummarist";
 
 
 const App = () => {
@@ -22,6 +24,8 @@ const App = () => {
                 <Route path="/netflix" element={<ProjNetflix />} />;
                 <Route path="/spotify" element={<ProjSpotify />} />;
                 <Route path="/library" element={<ProjLibrary />} />;
+                <Route path="/nftworld" element={<ProjNftWorld />} />;
+                <Route path="/summarist" element={<ProjSummarist />} />;                
             </Routes>
             <Footer />
         </div>
