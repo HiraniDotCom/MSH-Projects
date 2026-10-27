@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -11,6 +10,7 @@ import ProjSpotify from "./components/ProjSpotify";
 import ProjLibrary from "./components/ProjLibrary";
 import ProjNftWorld from "./components/ProjNftWorld";
 import ProjSummarist from "./components/ProjSummarist";
+import ProjChoghadiya from "./components/ProjChoghadiya";
 
 
 const App = () => {
@@ -25,7 +25,8 @@ const App = () => {
                 <Route path="/spotify" element={<ProjSpotify />} />;
                 <Route path="/library" element={<ProjLibrary />} />;
                 <Route path="/nftworld" element={<ProjNftWorld />} />;
-                <Route path="/summarist" element={<ProjSummarist />} />;                
+                <Route path="/summarist" element={<ProjSummarist />} />;
+                <Route path="/choghadiya" element={<ProjChoghadiya />} />;
             </Routes>
             <Footer />
         </div>

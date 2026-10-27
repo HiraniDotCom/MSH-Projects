@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
@@ -18,7 +18,7 @@ import Circle from "../assets/circle.svg";
 import SemiCircle from "../assets/semi circle.svg";
 import Squiggly from "../assets/squiggly.svg";
 import Triangle from "../assets/triangle.svg";
-import Resume from "../assets/FES Resume MSH.pdf";
+import Resume from "../assets/MSHJnrFEDResume.pdf";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -108,14 +108,14 @@ const Header = () => {
                         </p>
                         <div className="social__list">
                             <Link
-                                to="https://www.linkedin.com"
+                                to="https://www.linkedin.com/in/manji-hirani-1a7941419"
                                 target="_blank"
                                 className="social__link click"
                             >
                                 <FontAwesomeIcon icon={faLinkedin} />
                             </Link>
                             <Link
-                                to="https://www.github.com"
+                                to="https://github.com/HiraniDotCom/MSH-Projects"
                                 target="_blank"
                                 className="social__link click"
                             >
@@ -144,34 +144,14 @@ const Header = () => {
                         <h3 className="modal__title modal__title--about">
                             Here's a bit about me.
                         </h3>
-                        <h4 className="modal__subtitle modal__subtitle--about">
-                            Frontend Software Engineer
-                        </h4>
                         <p className="modal__para">
-                            I am a passionate
-                            <b className="purple">
-                                Frontend Software Engineer
-                            </b>{" "}
-                            with a strong focus on creating intuitive,
-                            responsive, and visually appealing user interfaces.
-                            <br />
-                            <br />
-                            Skilled in technologies like HTML, CSS, JavaScript,
-                            and modern frameworks such as React, I enjoy
-                            <b className="purple">
-                                {" "}
-                                transforming complex ideas
-                            </b>{" "}
-                            into seamless digital experiences. My approach
-                            combines clean, maintainable code with a keen eye
-                            for design, ensuring both functionality and
-                            aesthetics.
-                            <br />
-                            <br />I am eager to contribute my expertise to build
-                            engaging web applications that
-                            <b className="purple">
-                                deliver exceptional user experiences.
-                            </b>
+                            I am a passionate <strong className="purple">Frontend Software Engineer</strong> bridging the gap between
+                            complex software architecture & real-world
+                            business outcomes. With a 20-year background scaling
+                            a franchised enterprise to 6 locations & managing $2M+ in annual revenue, I bring an executive-level understanding of user workflows, product strategy, and operational metrics to modern engineering teams. </p>
+                            <p className="modal__para">
+                            I am open to <strong className="purple">Frontend Engineering roles</strong> where I can contribute enterprise-grade UI components while
+                            leveraging a deep understanding of business scalability. <strong className="purple">Let’s connect!</strong>
                         </p>
                         <div className="modal__languages">
                             <figure className="modal__language">

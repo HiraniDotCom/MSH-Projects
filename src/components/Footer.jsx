@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MSH from "../assets/MSH Logo.ico";
-import Resume from "../assets/FES Resume MSH.pdf";
+import Resume from "../assets/MSHJnrFEDResume.pdf";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
@@ -33,14 +33,14 @@ const Footer = () => {
                     </figure>
                     <div className="footer__social--list">
                         <Link
-                            to="https://www.GitHub.com"
+                            to="https://github.com/HiraniDotCom/MSH-Projects"
                             target="_blank"
                             className="nav__link--anchor link__hover-effect link__hover-effect--white"
                         >
                             GitHub
                         </Link>
                         <Link
-                            to="https://linkedIn.com"
+                            to="https://www.linkedin.com/in/manji-hirani-1a7941419"
                             target="_blank"
                             className="nav__link--anchor link__hover-effect link__hover-effect--white"
                         >

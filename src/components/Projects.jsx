@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Movies from "../assets/movies-app.png";
 import Netflix from "../assets/netflix-clone.png";
@@ -6,6 +6,7 @@ import Spotify from "../assets/spotify-clone.png";
 import Library from "../assets/library-app.png";
 import Summarist from "../assets/summarist-app.png";
 import NftWorld from "../assets/nftworld-app.png";
+import Choghadiya from "../assets/choghadiya-app.png";
 import {
     faGithub,
     faLinkedinIn,
@@ -142,6 +143,17 @@ const Projects = () => {
                                             <img
                                                 className="project__img"
                                                 src={Summarist}
+                                                alt="Project"
+                                            />
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="thumbnail__wrapper">
+                                    <div className="thumbnail__wrapper--bg">
+                                        <Link to="/choghadiya">
+                                            <img
+                                                className="project__img"
+                                                src={Choghadiya}
                                                 alt="Project"
                                             />
                                         </Link>
