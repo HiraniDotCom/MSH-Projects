@@ -1,16 +1,56 @@
-# React + Vite
+# My Projects Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, production-ready Vite-React application that allows viewers to study my work and test the deployed projects.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Key Features
 
-## React Compiler
+- **Home Page Animation:** Floating items that appear to follow mouse movement.
+- **Project Thumbnail Slideshow:** Move along slideshow track using navigation buttons, hover over thumbnails to view a larger version and reveal project title.
+- **Project Details Page:** Upon clicking a thumbnail, user gets to read a synopsis of the project, the tech stack used to complete it and follow a link to the live demo.
+- **Email Contact Modal:** If user clicks one of 3 links, they are directed to an overlay modal showing a little more info about the Software Developer's background and an active email contact form.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack & Architecture
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Frontend Core:** React.js (Vite), JavaScript (ES6+), HTML5, CSS3
+- **State Management:** React Hooks (`useState`, `useEffect`, `useContext`)
+- **Emailjs Contact Form;** Credentials stored in .env
+---
+
+## 📦 Installation & Setup
+
+Follow these steps to run the project locally on your machine:
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/HiraniDotCom/MSH-Projects
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Configure Environment Variables:** VITE_EMAILJS_SERVICE_ID="service_otp7b4l", VITE_EMAILJS_TEMPLATE_ID="template_onlzcwr", VITE_EMAILJS_PUBLIC_KEY="A6ds1qhmaDYSxiRr9"
+
+
+5. **Start the local development server:**
+    ```bash
+    npm run dev
+    ```
+    _The application should now be running locally at `http://localhost:5173`._
+
+---
+
+## Screenshots
+
+<img width="1078" height="1032" alt="Screenshot 2026-10-30 000922" src="https://github.com/user-attachments/assets/e6f4aa13-674d-41ec-b030-cc30a29cc7c2" />
+
+<img width="1078" height="1032" alt="Screenshot 2026-10-30 001015" src="https://github.com/user-attachments/assets/a67f915c-ae18-480c-aba1-046d1e5a0754" />
+
+<img width="1078" height="1032" alt="Screenshot 2026-10-30 000832" src="https://github.com/user-attachments/assets/a1f244d1-23be-454c-b8f6-def6b938ed1d" />
