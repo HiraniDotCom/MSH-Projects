@@ -5,8 +5,10 @@ import {
     faGithub,
     faHtml5,
     faCss3,
-    faJava,
+    faJs,
     faReact,
+    faTailwindCss,
+    faTypescript,
 } from "@fortawesome/free-brands-svg-icons";
 import { faFilePdf } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -20,8 +22,17 @@ import Squiggly from "../assets/squiggly.svg";
 import Triangle from "../assets/triangle.svg";
 import Resume from "../assets/MSHJnrFEDResume.pdf";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 const Header = () => {
+    // Component state for modal visibility
+    const [loadingVisible, setLoadingVisible] = useState(false);
+    const [successVisible, setSuccessVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
     // Handler for mouse movement
     function moveBackground(event) {
         const shapes = document.querySelectorAll(".shape");
@@ -36,7 +47,7 @@ const Header = () => {
                 `translate(${x * boolInt}px, ${y * boolInt}px)`;
         }
     }
-    // Attach and cleanup the event listener correctly
+
     useEffect(() => {
         window.addEventListener("mousemove", moveBackground);
 
@@ -45,39 +56,32 @@ const Header = () => {
         };
     }, []);
 
-    function contact(event) {
-        // Component state for modal visibility
-        const [loadingVisible, setLoadingVisible] = useState(false);
-        const [successVisible, setSuccessVisible] = useState(false);
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-        // Handle form submission
-        const handleSubmit = async (event) => {
-            event.preventDefault();
+        try {
+            setLoadingVisible(true);
 
-            try {
-                setLoadingVisible(true); // show loading overlay
+            await emailjs.sendForm(
+                "service_otp7b4l",
+                "template_onlzcwr",
+                event.target,
+                "A6ds1qhmaDYSxiRr9",
+            );
 
-                await emailjs.sendForm(
-                    "service_otp7b4l",
-                    "template_onlzcwr",
-                    event.target,
-                    "A6ds1qhmaDYSxiRr9",
-                );
+            setName("");
+            setEmail("");
+            setMessage("");
 
-                setLoadingVisible(false);
-                setSuccessVisible(true); // show success overlay
-            } catch (error) {
-                setLoadingVisible(false);
-                alert(
-                    "The email service is unavailable at this time. Please contact me directly: Hirani.dotcom@gmail.com",
-                );
-            }
-        };
-    }
+            setLoadingVisible(false);
+            setSuccessVisible(true);
+        } catch (error) {
+            console.error(error);
+            setLoadingVisible(false);
+            alert("The email service is unavailable...");
+        }
+    };
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    // Side effect: add/remove class on body when modal changes
     useEffect(() => {
         if (isModalOpen) {
             document.body.classList.add("modal--open");
@@ -85,7 +89,6 @@ const Header = () => {
             document.body.classList.remove("modal--open");
         }
 
-        // Cleanup on unmount
         return () => document.body.classList.remove("modal--open");
     }, [isModalOpen]);
 
@@ -145,19 +148,35 @@ const Header = () => {
                             Here's a bit about me.
                         </h3>
                         <p className="modal__para">
-                            I am a passionate <strong className="purple">Frontend Software Engineer</strong> bridging the gap between
-                            complex software architecture & real-world
-                            business outcomes. With a 20-year background scaling
-                            a franchised enterprise to 6 locations & managing $2M+ in annual revenue, I bring an executive-level understanding of user workflows, product strategy, and operational metrics to modern engineering teams. </p>
-                            <p className="modal__para">
-                            I am open to <strong className="purple">Frontend Engineering roles</strong> where I can contribute enterprise-grade UI components while
-                            leveraging a deep understanding of business scalability. <strong className="purple">Let’s connect!</strong>
+                            I am a passionate{" "}
+                            <strong className="purple">
+                                {" "}
+                                Frontend Software Engineer
+                            </strong>{" "}
+                            bridging the gap between complex software
+                            architecture & real-world business outcomes. With a
+                            20-year background scaling a franchised enterprise
+                            to 6 locations & managing 35+ employees producing
+                            $2M+ in annual revenue, I bring an executive-level
+                            understanding of user workflows, product strategy,
+                            and operational metrics to modern engineering
+                            teams.{" "}
+                        </p>
+                        <p className="modal__para">
+                            I am open to{" "}
+                            <strong className="purple">
+                                Frontend Engineering roles
+                            </strong>{" "}
+                            where I can contribute enterprise-grade UI
+                            components while leveraging a deep understanding of
+                            business scalability.{" "}
+                            <strong className="purple">Let’s connect!</strong>
                         </p>
                         <div className="modal__languages">
                             <figure className="modal__language">
                                 <FontAwesomeIcon
                                     icon={faHtml5}
-                                    className="modal__language--img"
+                                    className="modal__language--img icon__color--red"
                                     alt="HTML5"
                                 />
                                 <span className="language__name">HTML</span>
@@ -165,15 +184,15 @@ const Header = () => {
                             <figure className="modal__language">
                                 <FontAwesomeIcon
                                     icon={faCss3}
-                                    className="modal__language--img"
+                                    className="modal__language--img icon__color--blue"
                                     alt="CSS+3"
                                 />
                                 <span className="language__name">CSS</span>
                             </figure>
                             <figure className="modal__language">
                                 <FontAwesomeIcon
-                                    icon={faJava}
-                                    className="modal__language--img"
+                                    icon={faJs}
+                                    className="modal__language--img icon__color--yellow"
                                     alt="Javascript"
                                 />
                                 <span className="language__name">
@@ -182,8 +201,28 @@ const Header = () => {
                             </figure>
                             <figure className="modal__language">
                                 <FontAwesomeIcon
+                                    icon={faTailwindCss}
+                                    className="modal__language--img icon__color--teal"
+                                    alt="Javascript"
+                                />
+                                <span className="language__name">
+                                    TailwindCSS
+                                </span>
+                            </figure>
+                            <figure className="modal__language">
+                                <FontAwesomeIcon
+                                    icon={faTypescript}
+                                    className="modal__language--img icon__color--ts"
+                                    alt="Javascript"
+                                />
+                                <span className="language__name">
+                                    Typescript
+                                </span>
+                            </figure>
+                            <figure className="modal__language">
+                                <FontAwesomeIcon
                                     icon={faReact}
-                                    className="fa-brands fa-react modal__language--img"
+                                    className="modal__language--img icon__color--teal"
                                     alt="React"
                                 />
                                 <span className="language__name">React</span>
@@ -204,14 +243,17 @@ const Header = () => {
                         <h4 className="modal__subtitle modal__subtitle--contact">
                             I am currently open to new opportunities!
                         </h4>
-                        <form id="contact__form" onSubmit={contact(event)}>
+
+                        <form id="contact__form" onSubmit={handleSubmit}>
                             <div className="form__item">
                                 <label className="form__item--label">
                                     Name:{" "}
                                 </label>
                                 <input
                                     className="input"
-                                    input="user_name"
+                                    name="user_name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     type="text"
                                     required
                                 />
@@ -222,7 +264,9 @@ const Header = () => {
                                 </label>
                                 <input
                                     className="input"
-                                    input="user_email"
+                                    name="user_email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     required
                                 />
@@ -233,8 +277,9 @@ const Header = () => {
                                 </label>
                                 <textarea
                                     className="input"
-                                    input="message"
-                                    type="text"
+                                    name="message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     required
                                 ></textarea>
                             </div>
@@ -246,32 +291,40 @@ const Header = () => {
                                 Send it to me
                             </button>
                         </form>
-                        <div className="modal__overlay modal__overlay--loading">
-                            <FontAwesomeIcon icon={faSpinner} />
-                        </div>
-                        <div className="modal__overlay modal__overlay--success">
-                            <FontAwesomeIcon
-                                icon={faTimes}
-                                className="modal__exit click"
-                                onClick={() => setIsModalOpen(false)}
-                            />
-                            Thank you for your message! <br />
-                            <br />
-                            Looking forward to talking with you soon.
-                        </div>
+
+                        {loadingVisible && (
+                            <div className="modal__overlay modal__overlay--loading">
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    className="fa-spin"
+                                />
+                            </div>
+                        )}
+
+                        {successVisible && (
+                            <div className="modal__overlay modal__overlay--success">
+                                <FontAwesomeIcon
+                                    icon={faTimes}
+                                    className="modal__exit click"
+                                    onClick={() => setSuccessVisible(false)}
+                                />
+                                Thank you for your message! <br /> <br />
+                                Looking forward to talking with you soon.
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 {/* Floating Shapes */}
-                <img src={Circle} className="shape shape--0" />
-                <img src={SemiCircle} className="shape shape--1" />
-                <img src={Squiggly} className="shape shape--2" />
-                <img src={Circle} className="shape shape--3" />
-                <img src={Triangle} className="shape shape--4" />
-                <img src={Circle} className="shape shape--5" />
-                <img src={Squiggly} className="shape shape--6" />
-                <img src={Circle} className="shape shape--7" />
-                <img src={SemiCircle} className="shape shape--8" />
+                <img src={Circle} className="shape shape--0" alt="shape" />
+                <img src={SemiCircle} className="shape shape--1" alt="shape" />
+                <img src={Squiggly} className="shape shape--2" alt="shape" />
+                <img src={Circle} className="shape shape--3" alt="shape" />
+                <img src={Triangle} className="shape shape--4" alt="shape" />
+                <img src={Circle} className="shape shape--5" alt="shape" />
+                <img src={Squiggly} className="shape shape--6" alt="shape" />
+                <img src={Circle} className="shape shape--7" alt="shape" />
+                <img src={SemiCircle} className="shape shape--8" alt="shape" />
             </section>
         </div>
     );

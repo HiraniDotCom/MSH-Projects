@@ -11,23 +11,26 @@ import ProjLibrary from "./components/ProjLibrary";
 import ProjNftWorld from "./components/ProjNftWorld";
 import ProjSummarist from "./components/ProjSummarist";
 import ProjChoghadiya from "./components/ProjChoghadiya";
-
+import ProjSkinstric from "./components/ProjSkinstric";
 
 const App = () => {
     return (
-        <div>
+        <div className="app-layout">
             <Nav />
-            <Routes>
-                <Route path="/" element={<Header />} />;
-                <Route path="/projects" element={<Projects />} />;
-                <Route path="/movies" element={<ProjMovies />} />;
-                <Route path="/netflix" element={<ProjNetflix />} />;
-                <Route path="/spotify" element={<ProjSpotify />} />;
-                <Route path="/library" element={<ProjLibrary />} />;
-                <Route path="/nftworld" element={<ProjNftWorld />} />;
-                <Route path="/summarist" element={<ProjSummarist />} />;
-                <Route path="/choghadiya" element={<ProjChoghadiya />} />;
-            </Routes>
+            <main className="main-route-content">
+                <Routes>
+                    <Route path="/" element={<Header />} />;
+                    <Route path="/projects" element={<Projects />} />;
+                    <Route path="/movies" element={<ProjMovies />} />;
+                    <Route path="/netflix" element={<ProjNetflix />} />;
+                    <Route path="/spotify" element={<ProjSpotify />} />;
+                    <Route path="/library" element={<ProjLibrary />} />;
+                    <Route path="/nftworld" element={<ProjNftWorld />} />;
+                    <Route path="/summarist" element={<ProjSummarist />} />;
+                    <Route path="/choghadiya" element={<ProjChoghadiya />} />;
+                    <Route path="/skinstric" element={<ProjSkinstric />} />;
+                </Routes>
+            </main>
             <Footer />
         </div>
     );

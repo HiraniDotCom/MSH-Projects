@@ -1,305 +1,100 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Movies from "../assets/movies-app.png";
-import Netflix from "../assets/netflix-clone.png";
-import Spotify from "../assets/spotify-clone.png";
-import Library from "../assets/library-app.png";
-import Summarist from "../assets/summarist-app.png";
-import NftWorld from "../assets/nftworld-app.png";
-import Choghadiya from "../assets/choghadiya-app.png";
-import {
-    faGithub,
-    faLinkedinIn,
-    faHtml5,
-    faCss3,
-    faJava,
-    faReact,
-} from "@fortawesome/free-brands-svg-icons";
-import { faFilePdf, faEnvelope } from "@fortawesome/free-regular-svg-icons";
-import {
-    faAt,
-    faTimes,
-    faSpinner,
-    faLink,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Carousel.css";
 
-const Projects = () => {
-    function contact(event) {
-        // Component state for modal visibility
-        const [loadingVisible, setLoadingVisible] = useState(false);
-        const [successVisible, setSuccessVisible] = useState(false);
+const imageModules = import.meta.glob("../assets/ProjectImages/*.png", {
+    eager: true,
+});
 
-        // Handle form submission
-        const handleSubmit = async (event) => {
-            event.preventDefault();
-
-            try {
-                setLoadingVisible(true); // show loading overlay
-
-                await emailjs.sendForm(
-                    "service_otp7b4l",
-                    "template_onlzcwr",
-                    event.target,
-                    "A6ds1qhmaDYSxiRr9",
-                );
-
-                setLoadingVisible(false);
-                setSuccessVisible(true); // show success overlay
-            } catch (error) {
-                setLoadingVisible(false);
-                alert(
-                    "The email service is unavailable at this time. Please contact me directly: Hirani.dotcom@gmail.com",
-                );
-            }
-        };
-    }
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const toggleModal = () => setIsModalOpen((prev) => !prev);
-
-    // Side effect: add/remove class on body when modal changes
-    useEffect(() => {
-        if (isModalOpen) {
-            document.body.classList.add("modal--open");
-        } else {
-            document.body.classList.remove("modal--open");
-        }
-
-        // Cleanup on unmount
-        return () => document.body.classList.remove("modal--open");
-    }, [isModalOpen]);
-
-    return (
-        <div>
-            <section id="/projects">
-                <div className="container">
-                    <div className="row">
-                        <div className="projects__summary">
-                            <h1 className="section__title">
-                                Here are some of my{" "}
-                                <span className="purple">projects</span>
-                            </h1>
-                            <div className="project__summary--img">
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/spotify">
-                                            <img
-                                                className="project__img"
-                                                src={Spotify}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/movies">
-                                            <img
-                                                className="project__img"
-                                                src={Movies}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/netflix">
-                                            <img
-                                                className="project__img"
-                                                src={Netflix}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/library">
-                                            <img
-                                                className="project__img"
-                                                src={Library}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/nftworld">
-                                            <img
-                                                className="project__img"
-                                                src={NftWorld}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/summarist">
-                                            <img
-                                                className="project__img"
-                                                src={Summarist}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="thumbnail__wrapper">
-                                    <div className="thumbnail__wrapper--bg">
-                                        <Link to="/choghadiya">
-                                            <img
-                                                className="project__img"
-                                                src={Choghadiya}
-                                                alt="Project"
-                                            />
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            {/* Modal */}
-            <div className="modal">
-                <div className="modal__half modal__about">
-                    <h3 className="modal__title modal__title--about">
-                        Here's a bit about me.
-                    </h3>
-                    <h4 className="modal__subtitle modal__subtitle--about">
-                        Frontend Software Engineer
-                    </h4>
-                    <p className="modal__para">
-                        I am a passionate
-                        <b className="purple">
-                            Frontend Software Engineer
-                        </b>{" "}
-                        with a strong focus on creating intuitive, responsive,
-                        and visually appealing user interfaces.
-                        <br />
-                        <br />
-                        Skilled in technologies like HTML, CSS, JavaScript, and
-                        modern frameworks such as React, I enjoy
-                        <b className="purple">
-                            {" "}
-                            transforming complex ideas
-                        </b>{" "}
-                        into seamless digital experiences. My approach combines
-                        clean, maintainable code with a keen eye for design,
-                        ensuring both functionality and aesthetics.
-                        <br />
-                        <br />I am eager to contribute my expertise to build
-                        engaging web applications that
-                        <b className="purple">
-                            deliver exceptional user experiences.
-                        </b>
-                    </p>
-                    <div className="modal__languages">
-                        <figure className="modal__language">
-                            <FontAwesomeIcon
-                                icon={faHtml5}
-                                className="modal__language--img"
-                                alt="HTML5"
-                            />
-                            <span className="language__name">HTML</span>
-                        </figure>
-                        <figure className="modal__language">
-                            <FontAwesomeIcon
-                                icon={faCss3}
-                                className="modal__language--img"
-                                alt="CSS+3"
-                            />
-                            <span className="language__name">CSS</span>
-                        </figure>
-                        <figure className="modal__language">
-                            <FontAwesomeIcon
-                                icon={faJava}
-                                className="modal__language--img"
-                                alt="Javascript"
-                            />
-                            <span className="language__name">Javascript</span>
-                        </figure>
-                        <figure className="modal__language">
-                            <FontAwesomeIcon
-                                icon={faReact}
-                                className="fa-brands fa-react modal__language--img"
-                                alt="React"
-                            />
-                            <span className="language__name">React</span>
-                        </figure>
-                    </div>
-                </div>
-                <div className="modal__half modal__contact">
-                    <FontAwesomeIcon
-                        icon={faTimes}
-                        className="modal__exit click"
-                        onClick={toggleModal}
-                    />
-                    <h3 className="modal__title modal__title--contact">
-                        Let's have a chat . . .
-                    </h3>
-                    <h4 className="modal__subtitle modal__subtitle--contact">
-                        I am currently open to new opportunities!
-                    </h4>
-                    <form id="contact__form" onSubmit={contact(event)}>
-                        <div className="form__item">
-                            <label className="form__item--label">Name: </label>
-                            <input
-                                className="input"
-                                input="user_name"
-                                type="text"
-                                required
-                            />
-                        </div>
-                        <div className="form__item">
-                            <label className="form__item--label">Email: </label>
-                            <input
-                                className="input"
-                                input="user_email"
-                                type="email"
-                                required
-                            />
-                        </div>
-                        <div className="form__item">
-                            <label className="form__item--label">
-                                Message:{" "}
-                            </label>
-                            <textarea
-                                className="input"
-                                input="message"
-                                type="text"
-                                required
-                            ></textarea>
-                        </div>
-                        <button
-                            id="contact__submit"
-                            className="form__submit"
-                            type="submit"
-                        >
-                            Send it to me
-                        </button>
-                    </form>
-                    <div className="modal__overlay modal__overlay--loading">
-                        <FontAwesomeIcon icon={faSpinner} />
-                    </div>
-                    <div className="modal__overlay modal__overlay--success">
-                        <FontAwesomeIcon
-                            icon={faTimes}
-                            className="modal__exit click"
-                            onClick={toggleModal}
-                        />
-                        Thank you for your message! <br />
-                        <br />
-                        Looking forward to talking with you soon.
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+const routeMapping = {
+    "movies-app.png": { route: "/movies", title: "Movies App" },
+    "netflix-clone.png": { route: "/netflix", title: "Netflix Clone" },
+    "spotify-clone.png": { route: "/spotify", title: "Spotify Clone" },
+    "library-app.png": { route: "/library", title: "Digital Library" },
+    "nftworld-app.png": { route: "/nftworld", title: "NFT Marketplace" },
+    "summarist-app.png": { route: "/summarist", title: "Summarist Library" },
+    "choghadiya-app.png": { route: "/choghadiya", title: "Choghadiya Timings" },
+    "skinstric-app.png": { route: "/skinstric", title: "Skinstric Skin Care" },
 };
 
-export default Projects;
+const images = Object.keys(imageModules).map((path, index) => {
+    const filename = path.split("/").pop();
+
+    const config = routeMapping[filename] || {
+        route: "/",
+        title: `Project ${index + 1}`,
+    };
+
+    return {
+        id: index,
+        url: imageModules[path].default,
+        alt: config.title,
+        route: config.route,
+        title: config.title,
+    };
+});
+
+export default function Projects() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
+    const itemsToShow = 4;
+
+    const maxIndex = Math.max(0, images.length - itemsToShow);
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+    };
+
+    return (
+        <div className="carousel-wrapper">
+            <button
+                onClick={prevSlide}
+                className="nav-btn prev-btn"
+                aria-label="Previous"
+            >
+                ❮
+            </button>
+
+            <div className="carousel-container">
+                <div
+                    className="carousel-track"
+                    style={{
+                        transform: `translateX(-${currentIndex * (100 / itemsToShow)}%)`,
+                    }}
+                >
+                    {images.map((img) => (
+                        <div
+                            key={img.id}
+                            className="carousel-card"
+                            onClick={() => navigate(img.route)}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <div className="image-relative-container">
+                                <img
+                                    src={img.url}
+                                    alt={img.alt}
+                                    className="carousel-image"
+                                />
+                                <h3 className="carousel-heading">
+                                    {img.title}
+                                </h3>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <button
+                onClick={nextSlide}
+                className="nav-btn next-btn"
+                aria-label="Next"
+            >
+                ❯
+            </button>
+        </div>
+    );
+}
