@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Library from "../assets/ProjectImages/library-app.png";
 import { faLink, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 
 const ProjLibrary = () => {
@@ -42,10 +43,6 @@ const ProjLibrary = () => {
                                     book. Once user is finished shopping they
                                     get directed to their cart where they see
                                     the final itemised cost of their shop.
-                                    Unfortunately, have not yet worked out the
-                                    functionality for the checkout. I am sure
-                                    no-one wants to pay for a fictitious
-                                    shopping list.
                                 </p>
                                 <div className="project__description--links">
                                     <a
@@ -53,6 +50,14 @@ const ProjLibrary = () => {
                                         className="project__description--link"
                                     >
                                         <FontAwesomeIcon icon={faLink} />
+                                    </a>
+                                    <a
+                                        href="https://github.com/HiraniDotCom/MSH-OnlineLibraryApp"
+                                        className="project__description--link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <FontAwesomeIcon icon={faGithub} />
                                     </a>
                                 </div>
                             </div>

@@ -186,17 +186,21 @@ LANDING PAGE
 */
 
 #landing {
+    display: flex;
+    flex-direction: column;
     min-height: 80vh;
 }
 
 .header {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center;     /* Centers content horizontally */
     width: 100%;
     max-width: 1000px;
-    padding: 0 32px;
+    margin: 0 auto;          /* Centers the 1000px box horizontally */
+    padding: 130px 32px;
 }
 
 .header__para {
@@ -292,7 +296,8 @@ NAVINGATION
 nav {
     position: fixed;
     top: 0;
-    z-index: 10;
+    height: 90px;
+    /* z-index: 10; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -663,11 +668,13 @@ PROJECTS
 
 .project__description--subtitle {
     margin-top: 8px;
+    text-align: left;
 }
 
 .project__description--para {
     margin: 16px 0;
     line-height: 1.5;
+    text-align: left;
 }
 
 .project__description--link {
@@ -712,11 +719,16 @@ footer {
     margin-bottom: 6px;
 }
 
+.white-logo {
+    filter: brightness(0) invert(1);
+    width: 120px;
+    padding: 16px;
+}
+
 .footer__logo--img {
     width: 120px;
     padding: 4px;
-    filter: hue-rotate(var(--value, 360deg));
-    --value: 90deg;
+    color: white;
 }
 
 .footer__social--link,

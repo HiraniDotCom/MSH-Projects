@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Movies from "../assets/ProjectImages/movies-app.png";
 import { faLink, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faGithub} from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 
 const ProjMovies = () => {
@@ -42,8 +43,17 @@ const ProjMovies = () => {
                                     <a
                                         href="https://react-app-final-project-six.vercel.app/"
                                         className="project__description--link"
+                                        target="_blank"
                                     >
                                         <FontAwesomeIcon icon={faLink} />
+                                    </a>
+                                    <a
+                                        href="https://github.com/HiraniDotCom/MSH-MoviesSearchApp"
+                                        className="project__description--link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <FontAwesomeIcon icon={faGithub} />
                                     </a>
                                 </div>
                             </div>

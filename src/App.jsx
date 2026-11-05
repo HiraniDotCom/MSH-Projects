@@ -15,9 +15,9 @@ import ProjSkinstric from "./components/ProjSkinstric";
 
 const App = () => {
     return (
-        <div className="app-layout">
+        <div>
             <Nav />
-            <main className="main-route-content">
+            <main>
                 <Routes>
                     <Route path="/" element={<Header />} />;
                     <Route path="/projects" element={<Projects />} />;

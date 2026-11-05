@@ -29,7 +29,7 @@ const Footer = () => {
             <footer>
                 <div className="row footer__row">
                     <figure className="footer__logo--wrapper">
-                        <img src={MSH} className="footer__logo--img" />
+                        <img src={MSH} className="white-logo" width={80}  />
                     </figure>
                     <div className="footer__social--list">
                         <Link

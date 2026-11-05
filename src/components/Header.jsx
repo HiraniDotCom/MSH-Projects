@@ -16,6 +16,7 @@ import {
     faSpinner,
     faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
+import Nextjs from "../assets/Nextjs.png";
 import Circle from "../assets/circle.svg";
 import SemiCircle from "../assets/semi circle.svg";
 import Squiggly from "../assets/squiggly.svg";
@@ -100,15 +101,26 @@ const Header = () => {
                 <header className="header">
                     <div className="header__content">
                         <h1 className="title">Hello</h1>
-                        <h1 className="title purple">I'm Manji.</h1>
-                        <p className="header__para">
-                            I'm a{" "}
+                        <h1 className="title purple">I am Manji.</h1>
+                        <div className="header__para">
+                            A{" "}
                             <b className="purple">Frontend Software Engineer</b>{" "}
-                            with a strong passion for experiences.
+                            <ul>
+                                <li>
+                                    building{" "}
+                                    <b className="purple">React & Typescript</b>{" "}
+                                    web apps.{" "}
+                                </li>
+                                <li>Six deployed projects</li>
+                                <li>Frontend Simplified graduate</li>
+                                <li>
+                                    20+ years running a 6-locations business
+                                </li>
+                            </ul>
                             <br />
                             Here's a bit more{" "}
                             <b className="purple">about me.</b>
-                        </p>
+                        </div>
                         <div className="social__list">
                             <Link
                                 to="https://www.linkedin.com/in/manji-hirani-1a7941419"
@@ -227,16 +239,49 @@ const Header = () => {
                                 />
                                 <span className="language__name">React</span>
                             </figure>
+                            <figure className="modal__language">
+                                <img
+                                    src={Nextjs}
+                                    className="modal__language--img icon__color--teal"
+                                    alt="Next.js"
+                                    width={15}
+                                />
+                                <span className="language__name">Next.js</span>
+                            </figure>
                         </div>
                     </div>
                     <div className="modal__half modal__contact">
-                        <Link to="/">
-                            <FontAwesomeIcon
-                                icon={faTimes}
-                                className="modal__exit click"
-                                onClick={toggleModal}
-                            />
-                        </Link>
+                       
+                        <div
+                            className="modal__exit-container"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "flex-end",
+                                gap: "8px",
+                            }}
+                        >
+                            <span
+                                className="modal__esc-hint"
+                                aria-hidden="true"
+                                style={{
+                                    fontSize: "12px",
+                                    color: "#666",
+                                    fontFamily: "monospace",
+                                }}
+                            >
+                                [Esc]
+                            </span>
+
+                            <Link to="/" aria-label="Close modal">
+                                <FontAwesomeIcon
+                                    icon={faTimes}
+                                    alt="Close modal"
+                                    className="modal__exit click"
+                                    onClick={toggleModal}
+                                />
+                            </Link>
+                        </div>
                         <h3 className="modal__title modal__title--contact">
                             Let's have a chat . . .
                         </h3>

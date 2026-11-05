@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import choghadiya from "../assets/ProjectImages/choghadiya-app.png";
 
@@ -49,6 +50,12 @@ const ProjChoghadiya = () => {
                                         className="project__description--link"
                                     >
                                         <FontAwesomeIcon icon={faLink} />
+                                    </a>
+                                    <a
+                                        href="https://github.com/HiraniDotCom/Choghadiya"
+                                        className="project__description--link"
+                                    >
+                                        <FontAwesomeIcon icon={faGithub} />
                                     </a>
                                 </div>
                             </div>

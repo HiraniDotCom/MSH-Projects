@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import skinstric from "../assets/ProjectImages/skinstric-app.png";
 
@@ -32,19 +33,7 @@ const ProjSkinstric = () => {
                                     Router, React-Icons, Vercel Deployment
                                 </h4>
                                 <p className="project__description--para">
-                                    Challenged to create a routed app that
-                                    collects user name, ethnic origin and
-                                    invites user to either upload their facial
-                                    image or allow a screen capture of their
-                                    face. The captured image is uploaded to a
-                                    backend API and resultant demographic data
-                                    is returned and displayed for user to
-                                    confirm or adjust. Not part of the
-                                    internship project was using the confirmed
-                                    demographics to generate a recommended
-                                    facial treatment. The design format, colors
-                                    and layout was provided in a Figma file and
-                                    had to be adopted in the project.
+                                    Engineered a multiphase routed application that captures user demographic inputs and facial assets via file upload or media stream screen capture. Integrated a backend API pipeline to process facial images, rendering returned demographic payloads into interactive forms for user validation and adjustment.  Faithfully translated complex UX specifications, color tokens, and structural layout systems from high-fidelity Figma designs into semantically compliant frontend code.
                                 </p>
                                 <div className="project__description--links">
                                     <a
@@ -52,6 +41,14 @@ const ProjSkinstric = () => {
                                         className="project__description--link"
                                     >
                                         <FontAwesomeIcon icon={faLink} />
+                                    </a>
+                                    <a
+                                        href="https://github.com/HiraniDotCom/msh-skinstric"
+                                        className="project__description--link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <FontAwesomeIcon icon={faGithub} />
                                     </a>
                                 </div>
                             </div>
