@@ -1,8 +1,9 @@
 .carousel-wrapper {
     position: relative;
+    top: 90px;
     width: 100%;
     max-width: 1200px;
-    margin: 90px auto;
+    margin: 0 auto;
     display: flex;
     align-items: center;
 }
@@ -19,7 +20,8 @@
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     width: 100%;
     height: 35vh;
-    margin-top: 90px;
+    margin-top: 100px;
+    align-items: center;
 }
 
 .carousel-card {
@@ -44,13 +46,13 @@
 }
 
 .carousel-card:hover .image-relative-container {
-  transform: scale(1.4); 
+  transform: scale(0.9); 
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); 
 }
 
 .carousel-image {
     width: 100%;
-    height: auto; /* Adjust height to match your design */
+    height: auto;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -72,31 +74,23 @@
   font-weight: 600;
   text-align: center;
   z-index: 5; 
-  
-  /* 2. Match image radius contour for the overlay effect background */
-  border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  
-  /* 3. Dark gradient backdrop to ensure text is readable over bright images */
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
-  
-  /* Initial hidden state animation controls */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
   opacity: 0;
   transform: translateY(5px);
   transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-  pointer-events: none; /* Prevents text from blocking mouse clicks */
+  pointer-events: none;
 }
 
-/* When the parent card is hovered, reveal the text smoothly */
 .carousel-card:hover .carousel-heading {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* High-Visibility Floating Buttons */
 .nav-btn {
     position: absolute;
-    top: 50%;
+    top: 65%;
     transform: translateY(-50%);
     z-index: 20;
     background-color: rgba(25, 25, 25, 0.85);
@@ -122,11 +116,11 @@
 }
 
 .prev-btn {
-    left: -25px; /* Pulls the button slightly outward for visibility */
+    left: -5px;
 }
 
 .next-btn {
-    right: -25px;
+    right: -5px;
 }
 
 .carousel-main-content {
@@ -143,12 +137,11 @@
   width: 100%;
 }
 
-/* Dots Styling positioned clean and close */
 .carousel-dots {
   display: flex;
   justify-content: center;
   gap: 8px;
-  padding: 12px 0 4px 0; /* Tailor top padding to control how close it sits */
+  padding: 12px 0 4px 0;
 }
 
 .dot-btn {
@@ -172,20 +165,24 @@
 }
 
 
-/* Mobile Responsive adjustment to show 1 image at a time instead of 4 */
 @media (max-width: 768px) {
     .carousel-card {
-        flex: 0 0 100%;
+        flex: 0 0 50%;
     }
     .nav-btn {
         width: 40px;
         height: 40px;
         font-size: 18px;
     }
-    .prev-btn {
-        left: 5px;
+}
+
+@media (max-width: 480px) {
+    .carousel-card {
+        flex: 0 0 100%;
     }
-    .next-btn {
-        right: 5px;
+    .nav-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 16px;
     }
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Carousel.css";
 
@@ -15,15 +15,13 @@ const routeMapping = {
     "movies-app.png": { route: "/movies", title: "Movies App" },
 };
 
-// Map over routeMapping keys to preserve the custom configuration order
+
 const images = Object.keys(routeMapping)
     .map((filename, index) => {
-        // Find the matching file path from the asset glob
         const matchingPath = Object.keys(imageModules).find((path) =>
             path.endsWith(filename),
         );
 
-        // If the image file doesn't exist, skip rendering it safely
         if (!matchingPath) return null;
 
         const config = routeMapping[filename];
@@ -36,16 +34,32 @@ const images = Object.keys(routeMapping)
             title: config.title,
         };
     })
-    .filter(Boolean); // Clean up missing entries
+    .filter(Boolean);
+
+const getItemsToShow = () => {
+    if (window.innerWidth <= 480) return 1;
+    if (window.innerWidth <= 768) return 2;
+    return 4;
+};
 
 export default function Projects() {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [itemsToShow, setItemsToShow] = useState(getItemsToShow);
     const navigate = useNavigate();
-    const itemsToShow = 4;
+
+    useEffect(() => {
+        const updateItemsToShow = () => {
+            setItemsToShow(getItemsToShow());
+            setCurrentIndex(0);
+        };
+
+        window.addEventListener("resize", updateItemsToShow);
+        return () => window.removeEventListener("resize", updateItemsToShow);
+    }, []);
 
     const maxIndex = Math.max(0, images.length - itemsToShow);
 
-    const totalDots = maxIndex + 1; // Total number of dots based on the maximum index
+    const totalDots = maxIndex + 1;
 
     const prevSlide = () => {
         setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
@@ -65,7 +79,7 @@ export default function Projects() {
                 ❮
             </button>
 
-            {/* Main Track & Dots Content Area */}
+            
             <div className="carousel-main-content">
                 <div className="carousel-container">
                     <div
@@ -96,7 +110,6 @@ export default function Projects() {
                     </div>
                 </div>
 
-                {/* Positioned directly under the track inside the main content area */}
                 {totalDots > 1 && (
                     <div className="carousel-dots">
                         {Array.from({ length: totalDots }).map((_, index) => (

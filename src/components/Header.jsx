@@ -21,7 +21,7 @@ import Circle from "../assets/circle.svg";
 import SemiCircle from "../assets/semi circle.svg";
 import Squiggly from "../assets/squiggly.svg";
 import Triangle from "../assets/triangle.svg";
-import Resume from "../assets/MSHJnrFEDResume.pdf";
+import Resume from "../assets/resume_frontend.pdf";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 

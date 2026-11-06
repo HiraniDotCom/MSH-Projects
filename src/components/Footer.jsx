@@ -1,5 +1,5 @@
 import MSH from "../assets/MSH Logo.ico";
-import Resume from "../assets/MSHJnrFEDResume.pdf";
+import Resume from "../assets/resume_frontend.pdf";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
