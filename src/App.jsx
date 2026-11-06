@@ -1,4 +1,5 @@
-import { Route, Routes } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
@@ -14,12 +15,63 @@ import ProjChoghadiya from "./components/ProjChoghadiya";
 import ProjSkinstric from "./components/ProjSkinstric";
 
 const App = () => {
+    const [isContactOpen, setIsContactOpen] = useState(false);
+    const contactOpenerRef = useRef(null);
+    const mainRef = useRef(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const openContact = useCallback((opener) => {
+        contactOpenerRef.current = opener;
+        setIsContactOpen(true);
+    }, []);
+
+    const handleOpenContact = useCallback((opener) => {
+        openContact(opener);
+        if (location.pathname !== "/") {
+            navigate("/");
+        }
+    }, [location.pathname, navigate, openContact]);
+
+    const closeContact = useCallback(() => setIsContactOpen(false), []);
+    const previousPathRef = useRef(location.pathname);
+
+    useEffect(() => {
+        document.body.classList.toggle("modal--open", isContactOpen);
+
+        return () => document.body.classList.remove("modal--open");
+    }, [isContactOpen]);
+
+    useEffect(() => {
+        if (previousPathRef.current === location.pathname) {
+            return;
+        }
+
+        previousPathRef.current = location.pathname;
+        if (!isContactOpen) {
+            mainRef.current?.focus();
+        }
+    }, [isContactOpen, location.pathname]);
+
     return (
         <div>
-            <Nav />
-            <main>
+            <a className="skip-link" href="#main-content">
+                Skip to main content
+            </a>
+            <Nav onOpenContact={handleOpenContact} />
+            <main id="main-content" ref={mainRef} tabIndex="-1">
                 <Routes>
-                    <Route path="/" element={<Header />} />;
+                    <Route
+                        path="/"
+                        element={
+                            <Header
+                                isModalOpen={isContactOpen}
+                                onOpenContact={openContact}
+                                onCloseContact={closeContact}
+                                contactOpenerRef={contactOpenerRef}
+                            />
+                        }
+                    />
                     <Route path="/projects" element={<Projects />} />;
                     <Route path="/movies" element={<ProjMovies />} />;
                     <Route path="/netflix" element={<ProjNetflix />} />;
@@ -31,7 +83,7 @@ const App = () => {
                     <Route path="/skinstric" element={<ProjSkinstric />} />;
                 </Routes>
             </main>
-            <Footer />
+            <Footer onOpenContact={handleOpenContact} />
         </div>
     );
 };

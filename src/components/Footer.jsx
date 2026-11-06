@@ -1,29 +1,10 @@
-import { useEffect, useState } from "react";
 import MSH from "../assets/MSH Logo.ico";
 import Resume from "../assets/MSHJnrFEDResume.pdf";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
-const Footer = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    function toggleModal() {
-        setIsModalOpen((prev) => !prev);
-    }
-
-    // Side effect: add/remove class on body when modal changes
-    useEffect(() => {
-        if (isModalOpen) {
-            document.body.classList.add("modal--open");
-        } else {
-            document.body.classList.remove("modal--open");
-        }
-
-        // Cleanup on unmount
-        return () => document.body.classList.remove("modal--open");
-    }, [isModalOpen]);
-
+const Footer = ({ onOpenContact }) => {
     return (
         <div className="footer__container">
             <footer>
@@ -35,28 +16,32 @@ const Footer = () => {
                         <Link
                             to="https://github.com/HiraniDotCom/MSH-Projects"
                             target="_blank"
-                            className="nav__link--anchor link__hover-effect link__hover-effect--white"
+                            className="nav__link--anchor link__hover-effect link__hover-effect--white click"
                         >
                             GitHub
                         </Link>
                         <Link
                             to="https://www.linkedin.com/in/manji-hirani-1a7941419"
                             target="_blank"
-                            className="nav__link--anchor link__hover-effect link__hover-effect--white"
+                            className="nav__link--anchor link__hover-effect link__hover-effect--white click"
                         >
                             LinkedIn
                         </Link>
                         <Link
                             to={Resume}
                             target="_blank"
-                            className="nav__link--anchor link__hover-effect link__hover-effect--white"
+                            className="nav__link--anchor link__hover-effect link__hover-effect--white click"
                             download
                         >
                             Resume
                         </Link>
                         <button
                             className="mail__btn click"
-                            onClick={toggleModal}
+                            type="button"
+                            aria-label="Contact me"
+                            onClick={(event) =>
+                                onOpenContact(event.currentTarget)
+                            }
                         >
                             <FontAwesomeIcon icon={faEnvelope} />
                         </button>

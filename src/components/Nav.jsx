@@ -1,27 +1,10 @@
 import Me from "../assets/MSH-Sketch.jpg";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Nav = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    function toggleModal() {
-        setIsModalOpen((prev) => !prev);
-    }
-
-    useEffect(() => {
-        if (isModalOpen) {
-            document.body.classList.add("modal--open");
-        } else {
-            document.body.classList.remove("modal--open");
-        }
-
-        return () => document.body.classList.remove("modal--open");
-    }, [isModalOpen]);
-
+const Nav = ({ onOpenContact }) => {
     return (
         <div className="nav__container">
-            <nav>
+            <nav aria-label="Main navigation">
                 <figure>
                     <img id="personal-logo" src={Me} alt="" />
                 </figure>
@@ -42,11 +25,14 @@ const Nav = () => {
                             Projects
                         </Link>
                     </li>
-                    <li
-                        className="nav__link click nav__link--anchor link__hover-effect link__hover-effect--white"
-                        onClick={toggleModal}
-                    >
-                        Contact Me
+                    <li className="nav__link click">
+                        <button
+                            type="button"
+                            className="nav__link--anchor link__hover-effect link__hover-effect--white"
+                            onClick={(event) => onOpenContact(event.currentTarget)}
+                        >
+                            Contact Me
+                        </button>
                     </li>
                 </ul>
             </nav>

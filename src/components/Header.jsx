@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faLinkedin,
@@ -25,14 +25,19 @@ import Resume from "../assets/MSHJnrFEDResume.pdf";
 import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 
-const Header = () => {
-    // Component state for modal visibility
+const Header = ({
+    isModalOpen,
+    onOpenContact,
+    onCloseContact,
+    contactOpenerRef,
+}) => {
     const [loadingVisible, setLoadingVisible] = useState(false);
     const [successVisible, setSuccessVisible] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
+    const modalRef = useRef(null);
+    const closeButtonRef = useRef(null);
 
     // Handler for mouse movement
     function moveBackground(event) {
@@ -48,14 +53,6 @@ const Header = () => {
                 `translate(${x * boolInt}px, ${y * boolInt}px)`;
         }
     }
-
-    useEffect(() => {
-        window.addEventListener("mousemove", moveBackground);
-
-        return () => {
-            window.removeEventListener("mousemove", moveBackground);
-        };
-    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -84,20 +81,59 @@ const Header = () => {
     };
 
     useEffect(() => {
-        if (isModalOpen) {
-            document.body.classList.add("modal--open");
-        } else {
-            document.body.classList.remove("modal--open");
+        if (!isModalOpen) {
+            return undefined;
         }
 
-        return () => document.body.classList.remove("modal--open");
-    }, [isModalOpen]);
+        const opener = contactOpenerRef.current;
+        closeButtonRef.current?.focus();
 
-    const toggleModal = () => setIsModalOpen((prev) => !prev);
+        const handleModalKeyDown = (event) => {
+            if (event.key === "Escape") {
+                event.preventDefault();
+                onCloseContact();
+                return;
+            }
+
+            if (event.key !== "Tab") {
+                return;
+            }
+
+            const focusableElements = modalRef.current?.querySelectorAll(
+                'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+            );
+            const focusable = Array.from(focusableElements ?? []).filter(
+                (element) => element.offsetParent !== null,
+            );
+            const firstElement = focusable[0];
+            const lastElement = focusable[focusable.length - 1];
+
+            if (!firstElement) {
+                event.preventDefault();
+                modalRef.current?.focus();
+            } else if (event.shiftKey && document.activeElement === firstElement) {
+                event.preventDefault();
+                lastElement.focus();
+            } else if (
+                !event.shiftKey &&
+                document.activeElement === lastElement
+            ) {
+                event.preventDefault();
+                firstElement.focus();
+            }
+        };
+
+        document.addEventListener("keydown", handleModalKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleModalKeyDown);
+            opener?.focus();
+        };
+    }, [contactOpenerRef, isModalOpen, onCloseContact]);
 
     return (
         <div>
-            <section id="landing" onMouseMove={moveBackground(event)}>
+            <section id="landing" onMouseMove={moveBackground}>
                 <header className="header">
                     <div className="header__content">
                         <h1 className="title">Hello</h1>
@@ -139,13 +175,17 @@ const Header = () => {
                             <Link
                                 to={Resume}
                                 target="_blank"
-                                className="social__link no__cursor"
+                                className="social__link click"
                             >
                                 <FontAwesomeIcon icon={faFilePdf} />
                             </Link>
                             <button
-                                onClick={toggleModal}
-                                className="social__link no__cursor"
+                                type="button"
+                                aria-label="Contact me"
+                                onClick={(event) =>
+                                    onOpenContact(event.currentTarget)
+                                }
+                                className="social__link click"
                             >
                                 <FontAwesomeIcon icon={faEnvelope} />
                             </button>
@@ -154,7 +194,15 @@ const Header = () => {
                 </header>
 
                 {/* Modal */}
-                <div className="modal">
+                <div
+                    className="modal"
+                    ref={modalRef}
+                    role="dialog"
+                    aria-modal={isModalOpen}
+                    aria-hidden={!isModalOpen}
+                    aria-labelledby="contact-dialog-title"
+                    tabIndex="-1"
+                >
                     <div className="modal__half modal__about">
                         <h3 className="modal__title modal__title--about">
                             Here's a bit about me.
@@ -273,16 +321,23 @@ const Header = () => {
                                 [Esc]
                             </span>
 
-                            <Link to="/" aria-label="Close modal">
+                            <button
+                                type="button"
+                                ref={closeButtonRef}
+                                aria-label="Close contact dialog"
+                                className="modal__exit click"
+                                onClick={onCloseContact}
+                            >
                                 <FontAwesomeIcon
                                     icon={faTimes}
-                                    alt="Close modal"
-                                    className="modal__exit click"
-                                    onClick={toggleModal}
+                                    aria-hidden="true"
                                 />
-                            </Link>
+                            </button>
                         </div>
-                        <h3 className="modal__title modal__title--contact">
+                        <h3
+                            id="contact-dialog-title"
+                            className="modal__title modal__title--contact"
+                        >
                             Let's have a chat . . .
                         </h3>
                         <h4 className="modal__subtitle modal__subtitle--contact">
@@ -291,11 +346,15 @@ const Header = () => {
 
                         <form id="contact__form" onSubmit={handleSubmit}>
                             <div className="form__item">
-                                <label className="form__item--label">
+                                <label
+                                    className="form__item--label"
+                                    htmlFor="contact-name"
+                                >
                                     Name:{" "}
                                 </label>
                                 <input
                                     className="input"
+                                    id="contact-name"
                                     name="user_name"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
@@ -304,11 +363,15 @@ const Header = () => {
                                 />
                             </div>
                             <div className="form__item">
-                                <label className="form__item--label">
+                                <label
+                                    className="form__item--label"
+                                    htmlFor="contact-email"
+                                >
                                     Email:{" "}
                                 </label>
                                 <input
                                     className="input"
+                                    id="contact-email"
                                     name="user_email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
@@ -317,11 +380,15 @@ const Header = () => {
                                 />
                             </div>
                             <div className="form__item">
-                                <label className="form__item--label">
+                                <label
+                                    className="form__item--label"
+                                    htmlFor="contact-message"
+                                >
                                     Message:{" "}
                                 </label>
                                 <textarea
                                     className="input"
+                                    id="contact-message"
                                     name="message"
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
@@ -347,12 +414,22 @@ const Header = () => {
                         )}
 
                         {successVisible && (
-                            <div className="modal__overlay modal__overlay--success">
-                                <FontAwesomeIcon
-                                    icon={faTimes}
+                            <div
+                                className="modal__overlay modal__overlay--success"
+                                role="status"
+                                aria-live="polite"
+                            >
+                                <button
+                                    type="button"
+                                    aria-label="Close confirmation"
                                     className="modal__exit click"
                                     onClick={() => setSuccessVisible(false)}
-                                />
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faTimes}
+                                        aria-hidden="true"
+                                    />
+                                </button>
                                 Thank you for your message! <br /> <br />
                                 Looking forward to talking with you soon.
                             </div>

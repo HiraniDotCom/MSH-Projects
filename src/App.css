@@ -11,6 +11,26 @@ html {
     scroll-behavior: smooth;
 }
 
+:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 200;
+    padding: 10px 14px;
+    background-color: #fff;
+    color: #242424;
+    transform: translateY(-150%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 li {
     list-style-type: none;
 }
@@ -332,6 +352,11 @@ nav {
     font-weight: 700;
 }
 
+button.nav__link--anchor {
+    padding: 0;
+    cursor: pointer;
+}
+
 /* 
 
 MODAL
@@ -529,6 +554,10 @@ MODAL
     right: 20px;
     color: white;
     z-index: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
 }
 
 /* 
